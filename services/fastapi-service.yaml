@@ -1,0 +1,14 @@
+
+# file: fastapi-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: fastapi-record-service
+spec:
+  selector:
+    app: fastapi-record-app
+  ports:
+    - protocol: TCP
+      port: 80          # Service port
+      targetPort: 8000  # Container port
+  type: ClusterIP

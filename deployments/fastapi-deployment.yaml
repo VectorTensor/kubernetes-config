@@ -1,0 +1,28 @@
+
+# file: fastapi-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-record-app
+  labels:
+    app: fastapi-record-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: fastapi-record-app
+  template:
+    metadata:
+      labels:
+        app: fastapi-record-app
+    spec:
+      containers:
+        - name: fastapi-record-app
+          image: fastapi-record-app:latest  # your docker image
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          # Optional: set environment variables
+          # env:
+          #   - name: ENV_VAR
+          #     value: "value"
