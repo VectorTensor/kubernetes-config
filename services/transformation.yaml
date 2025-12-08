@@ -1,0 +1,16 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: transformation-service
+  labels:
+    app: transformation-service
+spec:
+  type: ClusterIP    # use LoadBalancer for external access
+  selector:
+    app: transformation-service
+  ports:
+    - name: grpc
+      port: 50050       # Port exposed inside the cluster
+      targetPort: 50050  # Container port
+      protocol: TCP

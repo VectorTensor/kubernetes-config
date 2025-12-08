@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transformation-service
+  labels:
+    app: transformation-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: transformation-service
+  template:
+    metadata:
+      labels:
+        app: transformation-service
+    spec:
+      containers:
+        - name: transformation-service
+          image: transformation-service:latest  # change to your actual image in registry
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: grpc
+              containerPort: 50050
+              protocol: TCP
+          env:
+            - name: PYTHONUNBUFFERED
+              value: "1"
+          # Basic TCP-based health checks for gRPC
+          readinessProbe:
+            tcpSocket:
+              port: 50050
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 50050
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+      restartPolicy: Always
