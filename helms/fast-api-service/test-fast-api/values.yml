@@ -1,0 +1,16 @@
+replicaCount: 2
+
+image:
+  repository: public.ecr.aws/n2z2i6h9/fast-api-test
+  tag: v1.0
+  pullPolicy: IfNotPresent
+
+
+ingress:
+  name: fastapi-test-ingress
+  host: fastapi.local
+
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
