@@ -13,4 +13,4 @@ spec:
               service:
                 name: flink-jobmanager
                 port:
-                  number: 30081
+                  number: 8081
