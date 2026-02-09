@@ -1,4 +1,4 @@
-replicaCount: 2
+replicaCount: 3
 
 image:
   repository: public.ecr.aws/n2z2i6h9/fast-api-test
@@ -7,8 +7,8 @@ image:
 
 
 ingress:
-  name: fastapi-test-ingress
-  host: fastapi.svc.local
+  name: fastapi-test-2-ingress
+  host: fastapi.sec.svc.local
 
 
 nodeSelector: {}

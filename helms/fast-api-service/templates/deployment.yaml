@@ -5,7 +5,7 @@ metadata:
   labels:
     app: {{ include "fastapi-app.name" . }}
 spec:
-  replicas: 2
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: {{ include "fastapi-app.name" . }}
