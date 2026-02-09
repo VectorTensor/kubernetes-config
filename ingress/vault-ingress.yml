@@ -3,9 +3,8 @@ kind: Ingress
 metadata:
   name: vault-ingress
   namespace: vault
-  annotations:
-    kubernetes.io/ingress.class: "traefik"
 spec:
+  ingressClassName: traefik   # Use your cluster's ingress class
   rules:
     - host: vault.lan
       http:
