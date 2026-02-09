@@ -6,7 +6,7 @@ metadata:
 spec:
   ingressClassName: traefik   # Use your cluster's ingress class
   rules:
-    - host: vault.lan
+    - host: vault.svc.local
       http:
         paths:
           - path: /
