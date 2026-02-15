@@ -11,6 +11,13 @@ ingress:
   host: fastapi.sec.svc.local
 
 
+serviceAccount:
+  name: myapp-sa
+
+vault:
+  role: myapp-role
+  secretPath: secret/fastapi
+
 nodeSelector: {}
 tolerations: []
 affinity: {}

@@ -13,11 +13,33 @@ spec:
     metadata:
       labels:
         app: {{ include "fastapi-app.name" . }}
+      annotations:
+        vault.hashicorp.com/agent-inject: "true"
+
+        vault.hashicorp.com/role: "{{ .Values.vault.role }}"
+
+        vault.hashicorp.com/agent-inject-secret-config: "{{ .Values.vault.secretPath }}"
+
+        vault.hashicorp.com/agent-inject-template-config: |
+          {{`{{- with secret "`}}{{ .Values.vault.secretPath }}{{`" -}}`}}
+          {{`{{- range $k, $v := .Data.data }}`}}
+          {{`{{ $k }}`}}={{`{{ $v }}`}}
+          {{`{{- end }}`}}
+          {{`{{- end }}`}}
     spec:
+      serviceAccountName: { { .Values.serviceAccount.name } }
       containers:
         - name: fastapi-app
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: [ "/bin/sh" ]
+          args:
+            - "-c"
+            - |
+              # Load all secrets from Vault file into env vars
+              if [ -f /vault/secrets/config ]; then
+                export $(grep -v '^#' /vault/secrets/config | xargs)
+              fi
           ports:
             - containerPort: 80
           resources:

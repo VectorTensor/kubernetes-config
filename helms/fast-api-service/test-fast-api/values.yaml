@@ -10,6 +10,12 @@ ingress:
   name: fastapi-test-ingress
   host: fastapi.svc.local
 
+serviceAccount:
+  name: myapp-sa
+
+vault:
+  role: myapp-role
+  secretPath: secret/fastapi
 
 nodeSelector: {}
 tolerations: []
