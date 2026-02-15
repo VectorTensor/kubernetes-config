@@ -32,15 +32,6 @@ spec:
         - name: fastapi-app
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: [ "/bin/sh" ]
-          args:
-            - "-c"
-            - |
-              # Check if secrets file exists
-              if [ -f /vault/secrets/config ]; then
-                # export all key=value pairs as environment variables
-                export $(grep -v '^#' /vault/secrets/config | xargs)
-              fi
           ports:
             - containerPort: 80
           resources:
