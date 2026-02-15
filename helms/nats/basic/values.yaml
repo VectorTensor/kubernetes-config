@@ -1,0 +1,3 @@
+monitoring:
+  enabled: true
+  port: 8222

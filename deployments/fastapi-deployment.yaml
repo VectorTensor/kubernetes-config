@@ -20,10 +20,6 @@ spec:
         - name: fastapi-record-app
           image: fastapi-record-app:latest  # your docker image
           imagePullPolicy: IfNotPresent
-          args:
-            - /bin/sh
-            - -c
-            - touch /tmp/healthcheck; sleep 60; rm -rf /tmp/healthcheck; sleep 600
           ports:
             - containerPort: 8000
           resources:
@@ -33,13 +29,6 @@ spec:
             limits:
               memory: "120Mi"
               cpu: "500m"
-          livenessProbe:
-            exec:
-              command:
-                - cat
-                - /tmp/healthcheck
-            initialDelaySeconds: 5
-            periodSeconds: 5
       nodeSelector:
         pratType: prat
 

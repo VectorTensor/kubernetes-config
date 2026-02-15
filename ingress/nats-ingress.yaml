@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nat-ingress
+spec:
+  rules:
+    - host: nat.svc.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: my-nats-headless
+                port:
+                  number: 8222
