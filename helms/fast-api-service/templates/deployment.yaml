@@ -27,7 +27,7 @@ spec:
           {{`{{- end }}`}}
           {{`{{- end }}`}}
     spec:
-      serviceAccountName: { { .Values.serviceAccount.name } }
+      serviceAccountName: {{ .Values.serviceAccount.name }}
       containers:
         - name: fastapi-app
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
