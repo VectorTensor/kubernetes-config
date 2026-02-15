@@ -16,7 +16,7 @@ serviceAccount:
 
 vault:
   role: my-app-role
-  secretPath: secret/fastapi
+  secretPath: secret/data/fastapi
 
 nodeSelector: {}
 tolerations: []
