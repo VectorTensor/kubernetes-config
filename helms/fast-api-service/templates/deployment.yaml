@@ -36,8 +36,9 @@ spec:
           args:
             - "-c"
             - |
-              # Load all secrets from Vault file into env vars
+              # Check if secrets file exists
               if [ -f /vault/secrets/config ]; then
+                # export all key=value pairs as environment variables
                 export $(grep -v '^#' /vault/secrets/config | xargs)
               fi
           ports:
