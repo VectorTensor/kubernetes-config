@@ -14,7 +14,7 @@ serviceAccount:
   name: myapp-sa
 
 vault:
-  role: myapp-role
+  role: my-app-role
   secretPath: secret/fastapi
 
 nodeSelector: {}
