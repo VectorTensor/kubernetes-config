@@ -6,6 +6,8 @@ server:
   raft:
     enabled: true
     path: /vault/data
+    setNodeId: true
+
 
   dataStorage:
     enabled: true
