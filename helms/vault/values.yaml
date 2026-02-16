@@ -13,7 +13,7 @@ server:
     enabled: true
     size: 10Gi
     mountPath: /vault/data
-    storageClass: standard
+    storageClass: local-path
     accessMode: ReadWriteOnce
 ui:
   enabled: true
