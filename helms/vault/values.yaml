@@ -3,10 +3,10 @@ server:
     enabled: true
     replicas: 1
 
-  raft:
-    enabled: true
-    path: /vault/data
-    setNodeId: true
+    raft:
+      enabled: true
+      path: /vault/data
+      setNodeId: true
 
 
   dataStorage:
