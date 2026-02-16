@@ -13,7 +13,20 @@ server:
     mountPath: /vault/data
     storageClass: standard
     accessMode: ReadWriteOnce
+  config: |
+    ui = true
 
+    listener "tcp" {
+      address = "0.0.0.0:8200"
+      cluster_address = "0.0.0.0:8201"
+      tls_disable = 1
+    }
+
+    storage "raft" {
+      path = "/vault/data"
+    }
+
+    service_registration "kubernetes" {}
 ui:
   enabled: true
 
