@@ -27,7 +27,7 @@ spec:
             - name: KAFKA_ADVERTISED_LISTENERS
               value: PLAINTEXT://kafka.kafka.svc.cluster.local:9092
             - name: KAFKA_CONTROLLER_QUORUM_VOTERS
-              value: "1@localhost:9093"
+              value: "1@kafka-0.kafka.svc.cluster.local:9093,2@kafka-1.kafka.svc.cluster.local:9093,3@kafka-2.kafka.svc.cluster.local:9093"
             - name: KAFKA_NUM_PARTITIONS
               value: "1"
             - name: KAFKA_AUTO_CREATE_TOPICS_ENABLE
