@@ -36,20 +36,15 @@ spec:
               value: "CONTROLLER"
             - name: ALLOW_PLAINTEXT_LISTENER
               value: "yes"
+          envFrom:
+            - configMapRef:
+                name: kafka-node-envs
           ports:
             - containerPort: 9092
           volumeMounts:
             - name: kafka-data
               mountPath: /var/lib/kafka/data
 
-    podManagementPolicy: OrderedReady
-    template:
-      spec:
-        containers:
-          - name: kafka
-            envFrom:
-              - configMapRef:
-                  name: kafka-node-envs
   volumeClaimTemplates:
     - metadata:
         name: kafka-data
