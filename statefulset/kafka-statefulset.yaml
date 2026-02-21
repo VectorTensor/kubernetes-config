@@ -43,7 +43,6 @@ spec:
               mountPath: /var/lib/kafka/data
 
     podManagementPolicy: OrderedReady
-    replicas: 3
     template:
       spec:
         containers:
