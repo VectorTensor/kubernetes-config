@@ -41,6 +41,16 @@ spec:
           volumeMounts:
             - name: kafka-data
               mountPath: /var/lib/kafka/data
+
+    podManagementPolicy: OrderedReady
+    replicas: 3
+    template:
+      spec:
+        containers:
+          - name: kafka
+            envFrom:
+              - configMapRef:
+                  name: kafka-node-envs
   volumeClaimTemplates:
     - metadata:
         name: kafka-data
@@ -50,3 +60,22 @@ spec:
         resources:
           requests:
             storage: 10Gi
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kafka-node-envs
+  namespace: kafka
+data:
+  kafka-0: |
+    KAFKA_NODE_ID=1
+    KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka-0.kafka.svc.cluster.local:9092
+    SPECIAL_ENV=foo
+  kafka-1: |
+    KAFKA_NODE_ID=2
+    KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka-1.kafka.svc.cluster.local:9092
+    SPECIAL_ENV=bar
+  kafka-2: |
+    KAFKA_NODE_ID=3
+    KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka-2.kafka.svc.cluster.local:9092
+    SPECIAL_ENV=baz
