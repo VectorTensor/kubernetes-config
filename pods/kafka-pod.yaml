@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kafka-client
+spec:
+  containers:
+    - name: kafka-client
+      image: confluentinc/cp-kafka:latest
+      command: ["sleep"]
+      args: ["infinity"]
+  restartPolicy: Never
