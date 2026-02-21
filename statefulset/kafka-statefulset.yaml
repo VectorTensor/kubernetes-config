@@ -20,10 +20,6 @@ spec:
           env:
             - name: KAFKA_PROCESS_ROLES
               value: broker,controller
-            - name: KAFKA_NODE_ID
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.name
             - name: KAFKA_LISTENERS
               value: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
             - name: KAFKA_ADVERTISED_LISTENERS
@@ -43,6 +39,13 @@ spec:
           volumeMounts:
             - name: kafka-data
               mountPath: /var/lib/kafka/data
+          command:
+            - sh
+            - -c
+            - |
+              export KAFKA_NODE_ID=$(( ${HOSTNAME##*-} + 1 ))
+              echo "Starting Kafka with broker.id=$KAFKA_NODE_ID on pod $HOSTNAME"
+              exec /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties
   volumeClaimTemplates:
     - metadata:
         name: kafka-data
