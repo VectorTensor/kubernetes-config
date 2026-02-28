@@ -8,5 +8,5 @@ spec:
     app: {{ include "nextjs-service.name" . }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: 8080
+      targetPort: 3000
       nodePort: {{ .Values.service.nodePort | default 30080 }}
