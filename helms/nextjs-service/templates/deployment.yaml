@@ -38,10 +38,11 @@ spec:
         - name: {{ include "nextjs-service.name" . }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["/bin/sh"]
+          command: ["/bin/sh", "-c"]
           args:
-            - "-c"
-            - ". /vault/secrets/config && node server.js"
+            - . /vault/secrets/config
+            - echo added config secrets to env
+            - node server.js
           ports:
             - containerPort: 3000
           env:
