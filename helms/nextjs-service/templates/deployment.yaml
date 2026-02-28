@@ -40,9 +40,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/bin/bash", "-c"]
           args:
-            - . /vault/secrets/config;
-            - echo added config secrets to env;
-            - exec node server.js;
+            -  ". /vault/secrets/config; echo added config secrets to env; exec node server.js"
           ports:
             - containerPort: 3000
           env:
