@@ -14,6 +14,8 @@ spec:
       labels:
         app: {{ include "lan-dashboard.name" . }}
     spec:
+      imagePullSecrets:
+        - name: ecr-registry
       containers:
         - name: {{ include "lan-dashboard.name" . }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
