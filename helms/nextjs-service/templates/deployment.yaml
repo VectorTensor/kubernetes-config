@@ -1,27 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "lan-dashboard.fullname" . }}
+  name: {{ include "nextjs-service.fullname" . }}
   labels:
-    app: {{ include "lan-dashboard.name" . }}
+    app: {{ include "nextjs-service.name" . }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "lan-dashboard.name" . }}
+      app: {{ include "nextjs-service.name" . }}
   template:
     metadata:
       labels:
-        app: {{ include "lan-dashboard.name" . }}
+        app: {{ include "nextjs-service.name" . }}
     spec:
+      # Pull secret for private ECR
       imagePullSecrets:
-        - name: ecr-registry
+        {{- range .Values.image.pullSecrets }}
+        - name: {{ .name }}
+        {{- end }}
       containers:
-        - name: {{ include "lan-dashboard.name" . }}
+        - name: {{ include "nextjs-service.name" . }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - containerPort: 8080
+            - containerPort: 3000
           env:
             - name: ENVIRONMENT
               value: "{{ .Values.env.ENVIRONMENT }}"
