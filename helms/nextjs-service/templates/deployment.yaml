@@ -42,7 +42,7 @@ spec:
           args:
             - . /vault/secrets/config;
             - echo added config secrets to env;
-            - node server.js;
+            - exec node server.js;
           ports:
             - containerPort: 3000
           env:
