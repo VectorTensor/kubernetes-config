@@ -41,7 +41,7 @@ spec:
           command: ["/bin/sh"]
           args:
             - "-c"
-            - "source /vault/secrets/config && node server.js"
+            - ". /vault/secrets/config && node server.js"
           ports:
             - containerPort: 3000
           env:
