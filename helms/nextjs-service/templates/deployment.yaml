@@ -20,12 +20,22 @@ spec:
 
         vault.hashicorp.com/agent-inject-secret-config: "{{ .Values.vault.secretPath }}"
 
-        vault.hashicorp.com/agent-inject-template-config: |
-          {{`{{- with secret "`}}{{ .Values.vault.secretPath }}{{`" -}}`}}
-          {{`{{- range $k, $v := .Data.data }}`}}
-          {{`{{ $k }}`}}={{`{{ $v }}`}}
-          {{`{{- end }}`}}
-          {{`{{- end }}`}}
+        # vault.hashicorp.com/agent-inject-template-config: |
+        #   {{`{{- with secret "`}}{{ .Values.vault.secretPath }}{{`" -}}`}}
+        #   {{`{{- range $k, $v := .Data.data }}`}}
+        #   {{`{{ $k }}`}}={{`{{ $v }}`}}
+        #   {{`{{- end }}`}}
+        #   {{`{{- end }}`}}
+
+        vault.hashicorp.com/agent-inject-template-lan-dashboard: |
+          {{- with secret "kv/data/lan-dashboard" -}}
+          export AUTH0_CLIENT_ID={{ .Data.data.AUTH0_CLIENT_ID }}
+          export AUTH0_CLIENT_SECRET={{ .Data.data.AUTH0_CLIENT_SECRET }}
+          export AUTH0_DOMAIN={{ .Data.data.AUTH0_DOMAIN }}
+          export AUTH0_SECRET={{ .Data.data.AUTH0_SECRET }}
+          export APP_BASE_URL={{ .Data.data.APP_BASE_URL }}
+          {{- end }}
+        vault.hashicorp.com/agent-inject-env-vars: "true"
     spec:
       serviceAccountName: {{ .Values.serviceAccount.name }}
       # Pull secret for private ECR
