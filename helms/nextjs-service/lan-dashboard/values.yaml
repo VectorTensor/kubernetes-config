@@ -4,7 +4,8 @@ image:
   repository: 387555629933.dkr.ecr.us-east-1.amazonaws.com/lan-dashboard
   tag: 0.0.7
   pullPolicy: IfNotPresent
-
+  pullSecrets:
+    - name: ecr-registry
 service:
   type: NodePort
   port: 80
