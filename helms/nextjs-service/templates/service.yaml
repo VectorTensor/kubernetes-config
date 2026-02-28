@@ -1,15 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "nextjs-service.fullname" . }}
-  labels:
-    {{- include "nextjs-service.labels" . | nindent 4 }}
+  name: {{ include "lan-dashboard.fullname" . }}
 spec:
   type: {{ .Values.service.type }}
+  selector:
+    app: {{ include "lan-dashboard.name" . }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
-  selector:
-    {{- include "nextjs-service.selectorLabels" . | nindent 4 }}
+      targetPort: 8080
+      nodePort: {{ .Values.service.nodePort | default 30080 }}

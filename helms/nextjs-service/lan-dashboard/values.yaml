@@ -1,0 +1,34 @@
+replicaCount: 2
+
+image:
+  repository: 387555629933.dkr.ecr.us-east-1.amazonaws.com/lan-dashboard
+  tag: 0.0.7
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 80
+  nodePort: 30080
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+
+env:
+  ENVIRONMENT: production
+
+livenessProbe:
+  path: /health
+  port: 8080
+  initialDelaySeconds: 10
+  periodSeconds: 15
+
+readinessProbe:
+  path: /health
+  port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 10
