@@ -36,7 +36,7 @@ readinessProbe:
 
 vault:
   role: nextjs
-  secretPath: secret/data/lan-dashboard
+  secretPath: kv/data/lan-dashboard
 
 serviceAccount:
   name: myapp-sa
