@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: 387555629933.dkr.ecr.us-east-1.amazonaws.com/kafka-consumer
-  tag: 0.0.5
+  tag: 0.0.6
   pullPolicy: IfNotPresent
   pullSecrets:
     - name: ecr-registry
