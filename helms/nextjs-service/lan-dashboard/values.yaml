@@ -40,3 +40,6 @@ vault:
 
 serviceAccount:
   name: myapp-sa
+
+ingress:
+  host: dash.svc.local
