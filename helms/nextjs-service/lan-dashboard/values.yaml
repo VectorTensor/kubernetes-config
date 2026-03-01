@@ -43,3 +43,4 @@ serviceAccount:
 
 ingress:
   host: dash.svc.local
+  name: lan-dashboard-ingress
