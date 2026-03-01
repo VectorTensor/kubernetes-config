@@ -29,7 +29,7 @@ spec:
     spec:
       serviceAccountName: {{ .Values.serviceAccount.name }}
       containers:
-        - name: fastapi-app
+        - name: fa{{ include "fastapi-app.name" . }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
