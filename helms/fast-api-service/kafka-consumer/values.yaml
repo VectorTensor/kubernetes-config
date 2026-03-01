@@ -11,7 +11,7 @@ ingress:
   host: consumer.svc.local
 
 serviceAccount:
-  name: consumer-role
+  name: myapp-sa
 
 vault:
   role: consumer-role
