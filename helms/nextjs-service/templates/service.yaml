@@ -3,7 +3,6 @@ kind: Service
 metadata:
   name: {{ include "nextjs-service.fullname" . }}
 spec:
-  type: {{ .Values.service.type }}
   selector:
     app: {{ include "nextjs-service.name" . }}
   ports:
