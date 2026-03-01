@@ -1,4 +1,4 @@
-replicaCount: 2
+replicaCount: 1
 
 image:
   repository: 387555629933.dkr.ecr.us-east-1.amazonaws.com/kafka-consumer
