@@ -1,22 +1,21 @@
-
 replicaCount: 2
 
 image:
-  repository: public.ecr.aws/n2z2i6h9/fast-api-test
-  tag: v1.0
+  repository: 387555629933.dkr.ecr.us-east-1.amazonaws.com/kafka-consumer
+  tag: 0.0.1
   pullPolicy: IfNotPresent
 
 
 ingress:
-  name: consumer-ingress
+  name: consumer-test-ingress
   host: consumer.svc.local
 
 serviceAccount:
-  name: myapp-sa
+  name: consumer-role
 
 vault:
-  role: my-app-role
-  secretPath: secret/data/fastapi
+  role: consumer-role
+  secretPath: kv/data/kafka-consumer
 
 nodeSelector: {}
 tolerations: []

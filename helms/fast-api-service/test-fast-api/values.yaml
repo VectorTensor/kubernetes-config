@@ -1,8 +1,8 @@
 replicaCount: 2
 
 image:
-  repository: 387555629933.dkr.ecr.us-east-1.amazonaws.com/kafka-consumer
-  tag: 0.0.1
+  repository: public.ecr.aws/n2z2i6h9/fast-api-test
+  tag: v1.0
   pullPolicy: IfNotPresent
 
 
@@ -14,8 +14,8 @@ serviceAccount:
   name: myapp-sa
 
 vault:
-  role: consumer-role
-  secretPath: kv/data/lan-dashboard
+  role: my-app-role
+  secretPath: secret/data/fastapi
 
 nodeSelector: {}
 tolerations: []
