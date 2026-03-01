@@ -7,6 +7,6 @@ spec:
   selector:
     app: {{ include "nextjs-service.name" . }}
   ports:
-    - port: {{ .Values.service.port }}
+    - port: 80
       targetPort: 3000
-      nodePort: {{ .Values.service.nodePort | default 30080 }}
+      protocol: TCP
