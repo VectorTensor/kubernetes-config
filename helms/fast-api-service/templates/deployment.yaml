@@ -28,6 +28,10 @@ spec:
           {{`{{- end }}`}}
     spec:
       serviceAccountName: {{ .Values.serviceAccount.name }}
+      imagePullSecrets:
+        {{- range .Values.image.pullSecrets }}
+        - name: {{ .name }}
+        {{- end }}
       containers:
         - name: fa{{ include "fastapi-app.name" . }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
