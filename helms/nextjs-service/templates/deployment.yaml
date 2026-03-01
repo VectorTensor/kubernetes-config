@@ -38,7 +38,6 @@ spec:
         - name: {{ include "nextjs-service.name" . }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["./prod-deploy.sh"]
           ports:
             - containerPort: 3000
           env:
