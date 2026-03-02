@@ -33,12 +33,12 @@ spec:
             - name: KAFKA_CONTROLLER_QUORUM_VOTERS
               value: "1@localhost:9093"
             - name: KAFKA_NUM_PARTITIONS
-              value: "1"
+              value: "3"
             - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
               value: "1"
             - name: KAFKA_AUTO_CREATE_TOPICS_ENABLE
               value: "true"
-            - name: KAFKA_OFFSETS.TOPIC.NUM.PARTITIONS
+            - name: KAFKA_OFFSETS_TOPIC_NUM_PARTITIONS
               value: "3"
             - name: KAFKA_CONTROLLER_LISTENER_NAMES
               value: "CONTROLLER"
