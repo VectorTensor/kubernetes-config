@@ -29,7 +29,7 @@ spec:
             - name: KAFKA_INTER_BROKER_LISTENER_NAME
               value: PLAINTEXT
             - name: KAFKA_LISTENER_SECURITY_PROTOCOL_MAP
-              value: EXTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT
+              value: EXTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
             - name: KAFKA_CONTROLLER_QUORUM_VOTERS
               value: "1@localhost:9093"
             - name: KAFKA_NUM_PARTITIONS
