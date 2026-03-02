@@ -39,7 +39,7 @@ spec:
             - name: KAFKA_AUTO_CREATE_TOPICS_ENABLE
               value: "true"
             - name: KAFKA_OFFSETS.TOPIC.NUM.PARTITIONS
-              value: "1"
+              value: "3"
             - name: KAFKA_CONTROLLER_LISTENER_NAMES
               value: "CONTROLLER"
             - name: ALLOW_PLAINTEXT_LISTENER
