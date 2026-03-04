@@ -44,16 +44,16 @@ spec:
             - name: KAFKA_CONTROLLER_LISTENER_NAMES
               value: {{ .Values.env_vars.kafka_controller_listener_names }}
             - name: ALLOW_PLAINTEXT_LISTENER
-              value: "yes"
+              value: {{ .Values.env_vars.allow_plaintext_listener }}
           ports:
             - containerPort: 9092
           volumeMounts:
-            - name: kafka-data
-              mountPath: /var/lib/kafka/data
+            - name: {{ .Values.volumeMounts.name }}
+              mountPath: {{ .Values.volumeMounts.mountPath }}
 
   volumeClaimTemplates:
     - metadata:
-        name: kafka-data
+        name: {{ .Values.volumeMounts.name }}
       spec:
         accessModes: ["ReadWriteOnce"]
         storageClassName: local-path

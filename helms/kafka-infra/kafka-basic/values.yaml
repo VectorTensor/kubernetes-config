@@ -1,6 +1,8 @@
 namespace: kafka
 serviceName: kafka-service
 replica: 1
+headlessName: kafka-headless
+
 env_vars:
   nodeId: "1"
   kafka_listeners: INTERNAL://:9092,EXTERNAL://:9094,CONTROLLER://:9093
@@ -13,3 +15,10 @@ env_vars:
   kafka_auto_create_topics_enable: "true"
   kafka_offsets_topic_num_partitions: "10"
   kafka_controller_listener_names: "CONTROLLER"
+  allow_plaintext_listener: "yes"
+
+volumeMounts:
+  name: kafka-data
+  mountPath: /var/lib/kafka/data
+
+nodePort: 30030
