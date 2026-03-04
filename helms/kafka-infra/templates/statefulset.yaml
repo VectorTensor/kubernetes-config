@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "kafka-infra.fullname" . }}
+  namespace: {{ .Values.namespace }}
+
+spec:
+  serviceName: {{ .Values.serviceName }}
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ include "kafka-infra.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "kafka-infra.fullname" . }}
+    spec:
+      containers:
+        - name: {{ include "kafka-infra.fullname" . }}
+          image: apache/kafka:3.7.0
+          env:
+            - name: KAFKA_PROCESS_ROLES
+              value: broker,controller
+            - name: KAFKA_NODE_ID
+              value: {{ .Values.env_vars.nodeId }}
+            - name: KAFKA_LISTENERS
+              value: {{ .Values.env_vars.kafka_listeners }}
+            - name: KAFKA_ADVERTISED_LISTENERS
+              value: {{ .Values.env_vars.kafka_adv_listeners }}
+            - name: KAFKA_INTER_BROKER_LISTENER_NAME
+              value: {{ .Values.env_vars.kafka_inter_broker_listener_name }}
+            - name: KAFKA_LISTENER_SECURITY_PROTOCOL_MAP
+              value: {{ .Values.env_vars.kafka_listener_security_protocol_map }}
+            - name: KAFKA_CONTROLLER_QUORUM_VOTERS
+              value: {{ .Values.env_vars.kafka_controller_quorum_voters }}
+            - name: KAFKA_NUM_PARTITIONS
+              value: {{ .Values.env_vars.kafka_num_partitions }}
+            - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
+              value: {{ .Values.env_vars.kafka_offsets_topic_replication_factor }}
+            - name: KAFKA_AUTO_CREATE_TOPICS_ENABLE
+              value: {{ .Values.env_vars.kafka_auto_create_topics_enable }}
+            - name: KAFKA_OFFSETS_TOPIC_NUM_PARTITIONS
+              value: {{ .Values.env_vars.kafka_offsets_topic_num_partitions }}
+            - name: KAFKA_CONTROLLER_LISTENER_NAMES
+              value: {{ .Values.env_vars.kafka_controller_listener_names }}
+            - name: ALLOW_PLAINTEXT_LISTENER
+              value: "yes"
+          ports:
+            - containerPort: 9092
+          volumeMounts:
+            - name: kafka-data
+              mountPath: /var/lib/kafka/data
+
+  volumeClaimTemplates:
+    - metadata:
+        name: kafka-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: local-path
+        resources:
+          requests:
+            storage: 10Gi
