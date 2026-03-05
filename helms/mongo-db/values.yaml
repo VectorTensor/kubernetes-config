@@ -1,0 +1,35 @@
+architecture: standalone
+
+image:
+  registry: docker.io
+  repository: bitnami/mongodb
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+auth:
+  enabled: true
+  rootUser: root
+  rootPassword: mypassword
+  database: mydb
+  usernames:
+    - appuser
+  passwords:
+    - apppassword
+  databases:
+    - datasink
+
+persistence:
+  enabled: true
+  size: 5Gi
+
+service:
+  type: ClusterIP
+  port: 27017
+
+resources:
+  requests:
+    cpu: 200m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
