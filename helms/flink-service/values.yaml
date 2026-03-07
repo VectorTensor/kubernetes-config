@@ -3,7 +3,7 @@ fullnameOverride: ""
 
 image:
   repository: flink
-  tag: 1.14.6-scala_2.12
+  tag: 2.1.1-scala_2.12-java21
   pullPolicy: IfNotPresent
 imagePullSecrets: []
 
@@ -296,12 +296,6 @@ jobmanager:
     name:
     annotations: {}
   # livenessProbe will conduct checks for rpc port as tcpSocket probe
-  livenessProbe:
-    initialDelaySeconds: 20
-    periodSeconds: 15
-  readinessProbe:
-    periodSeconds: 10
-    initialDelaySeconds: 20
   podAnnotations: {}
 
 taskmanager:
