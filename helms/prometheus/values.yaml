@@ -812,10 +812,9 @@ server:
 scrapeConfigs:
   prometheus:
     enabled: true
-    job_name: ""
+    job_name: "mongodb-exporter"
     static_configs:
       - targets:
-          - localhost:9090
           - mongo-prom-prometheus-mongodb-exporter.monitoring:9216
   kubernetes-api-servers:
     enabled: true
